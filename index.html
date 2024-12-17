@@ -39,7 +39,7 @@
 </header>
 <nav>
     <div id="logo">
-        <img src="public/img/Kumbet-logo-orjinal-1024x1024.jpg">
+        <img id="logo-img" src="public/img/Kumbet-logo-orjinal-1024x1024.jpg">
     </div>
     <div id="nav-buttons">
         <a href="./">Home</a>
@@ -49,11 +49,20 @@
     </div>
 </nav>
 <main>
-    <section id="front-page-section">
-        <header>
-            <h1>Akkumbet</h1>
-        </header>
-    </section>
+    <div id="bannerSlider" class="slider">
+        <div class="slide active"><img src="public/img/gebouw.jpg" /></div>
+        <div class="slide">Slide 2</div>
+        <div class="slide">Slide 3</div>
+        <h1>Akkumbet</h1>
+        <button class="prev">Prev</button>
+        <button class="next">Next</button>
+    </div>
+
+    <!--    <section id="front-page-section">-->
+<!--        <header>-->
+<!--            <h1>Akkumbet</h1>-->
+<!--        </header>-->
+<!--    </section>-->
     <section id="introduction-section">
         <div id="introduction-text-container">
             <h1>Wie zijn wij?</h1>
@@ -77,6 +86,11 @@
                 publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten. </p>
         </div>
     </section>
+    <div id="learn-more-container">
+        <a href="./over-ons.html">Over ons</a>
+        <a href="./projecten.html">Projecten</a>
+        <a href="./contact.html">Contact</a>
+    </div>
 </main>
 </body>
 </html>

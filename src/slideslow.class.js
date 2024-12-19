@@ -1,49 +1,54 @@
 export class Slideshow {
     constructor(containerSelector, interval = 3000) {
         this.container = document.querySelector(containerSelector);
-        this.slides = this.container.querySelectorAll('.slide');
-        this.prevButton = this.container.querySelector('.prev');
-        this.nextButton = this.container.querySelector('.next');
+        this.track = this.container.querySelector('.slider-track');
+        this.slides = Array.from(this.track.children);
+        this.totalSlides = this.slides.length;
         this.currentIndex = 0;
         this.interval = interval;
         this.timer = null;
+
+        // Buttons
+        this.prevButton = this.container.querySelector('.prev');
+        this.nextButton = this.container.querySelector('.next');
 
         this.init();
     }
 
     init() {
-        // Show the first slide
-        this.showSlide(this.currentIndex);
+        // Dynamically set the track's width based on the number of slides
+        this.track.style.width = `${this.totalSlides * 100}%`;
 
-        // Set up event listeners for navigation
-        this.prevButton.addEventListener('click', () => this.prevSlide());
-        this.nextButton.addEventListener('click', () => this.nextSlide());
+        // Add event listeners for buttons
+        this.prevButton.addEventListener('click', () => {
+            this.prevSlide();
+            this.stopAutoSlide();
+            this.startAutoSlide();
+        });
+        this.nextButton.addEventListener('click', () => {
+            this.nextSlide();
+            this.stopAutoSlide();
+            this.startAutoSlide();
+        });
 
         // Start auto-slide
         this.startAutoSlide();
-
-        // Pause on hover
-        this.container.addEventListener('mouseenter', () => this.stopAutoSlide());
-        this.container.addEventListener('mouseleave', () => this.startAutoSlide());
     }
 
-    showSlide(index) {
-        // Hide all slides
-        this.slides.forEach(slide => slide.classList.remove('active'));
-
-        // Show the current slide
-        this.slides[index].classList.add('active');
+    updateSlidePosition() {
+        const offset = -this.currentIndex * 100; // Calculate offset in percentage
+        this.track.style.transform = `translateX(${offset}%)`;
     }
 
     nextSlide() {
-        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-        this.showSlide(this.currentIndex);
+        this.currentIndex = (this.currentIndex + 1) % this.totalSlides; // Loop back to the first slide
+        this.updateSlidePosition();
     }
 
     prevSlide() {
         this.currentIndex =
-            (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-        this.showSlide(this.currentIndex);
+            (this.currentIndex - 1 + this.totalSlides) % this.totalSlides; // Loop back to the last slide
+        this.updateSlidePosition();
     }
 
     startAutoSlide() {

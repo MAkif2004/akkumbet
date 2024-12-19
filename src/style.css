@@ -39,11 +39,18 @@ nav {
     display: flex;
 
     font-weight: bold;
+    z-index: 1;
 
 }
 
 #logo, #nav-buttons {
     width: 50%;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 #logo-img {
@@ -83,16 +90,32 @@ nav {
     justify-content: center;
 }
 
-#bannerSlider h1 {
-    background: white;
-    padding: 0 20px;
-    border-radius: 5px;
-    font-size: 50px;
-    margin-top: 150px;
-    color: #d2aa4a;
-
+#description, #title {
+    background: rgba(0, 0, 0, 0.21);
     position: absolute;
-    top: 17px;
+    padding: 30px;
+    color: white;
+    border-radius: 10px;
+}
+
+#description {
+    bottom: 10%;
+}
+
+#title {
+    top: 10%;
+}
+
+#bannerSlider #title h1 {
+    text-align: center;
+    font-size: 50px;
+    margin: 0;
+}
+
+#bannerSlider #description h3 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
 }
 
 #introduction-section {
@@ -154,25 +177,34 @@ nav {
     background: #000000;
 }
 
-.slider {
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+#bannerSlider {
     position: relative;
     width: 100%;
     height: 800px;
     overflow: hidden;
 }
 
-.slide {
-    display: none;
-    width: 100%;
-    height: 100%;
-    background: lightgray;
-    text-align: center;
-    line-height: 300px;
-    font-size: 24px;
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Dynamically adjusted by JS */
 }
 
-.slide.active {
-    display: block;
+.slide {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 button.prev,
@@ -184,7 +216,14 @@ button.next {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    font-size: 15px;
+    z-index: 10;
 }
 
 button.prev {

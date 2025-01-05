@@ -28,63 +28,6 @@ html, body {
     margin: 0 10px;
 }
 
-nav {
-    position: sticky;
-
-    top: 0;
-    width: 100%;
-    background: white;
-    box-shadow: 0px 2px 14px 4px rgba(0, 0, 0, 0.05);
-
-    display: flex;
-
-    font-weight: bold;
-    z-index: 1;
-
-}
-
-#logo, #nav-buttons {
-    width: 50%;
-}
-
-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
-#logo-img {
-    height: 80px;
-    width: 80px;
-}
-
-#logo {
-    display: flex;
-    justify-content: center;
-}
-
-#nav-buttons {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-}
-
-#nav-buttons a {
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-    font-size: larger;
-    margin: 0 25px;
-    height: 100%;
-    cursor: pointer;
-    color: black;
-    text-decoration: none;
-}
-
-#nav-buttons a:hover {
-    color: red;
-}
-
 #introduction-section p:first-of-type {
     margin-top: 40px;
 }

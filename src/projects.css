@@ -1,0 +1,92 @@
+#recent-project-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#recent-project-section h1 {
+    margin-top: 70px;
+    text-align: center;
+    font-size: 2.5em;
+    border-bottom: 3px solid black;
+    padding-bottom: 20px;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.recent-project-container {
+    max-width: 1000px;
+    width: 70%;
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.recent-project-container .project-img {
+    aspect-ratio: 4 / 3;
+    width: 50%;
+    height: auto;
+    border: 20px solid white;
+}
+
+.recent-project-container .project-text {
+    width: 30%;
+    padding: 20px;
+    border-radius: 20px;
+}
+.recent-project-container h3 {
+    font-size: 2em;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.recent-project-container p {
+    font-size: 1.2em;
+    border-radius: 10px;
+    text-align: center;
+    background: white;
+    padding: 20px;
+}
+
+#recentt-projects-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#recentt-projects-section h2 {
+    text-align: center;
+    font-size: 2.2em;
+    padding-bottom: 20px;
+}
+
+#recentt-projects-container {
+    margin-top: 30px;
+    padding-top: 20px;
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#recentt-projects-container h3 {
+    background: white;
+    width: 200px;
+
+    font-size: 1.8em;
+
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+#recentt-projects-container p {
+    margin-top: 10px;
+    background: white;
+    max-width: 850px;
+    width: 80%;
+    padding: 10px;
+}
+

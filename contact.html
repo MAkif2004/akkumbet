@@ -3,15 +3,43 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-    <link rel="stylesheet" href="src/style.css"/>
+    <link rel="stylesheet" href="src/nav.css"/>
+    <link rel="stylesheet" href="src/contact.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script defer type="module" src="/src/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Akkumbet</title>
 </head>
 <body>
+<header id="contact-header">
+    <div id="left-contact-header">
+        <div class="contact-header-content">
+            <i class="fas fa-phone"></i>
+            <p>06 42603776</p>
+        </div>
+        <div class="contact-header-content">
+            <i class="fas fa-envelope"></i>
+            <p>osman.goge@gmail.com</p>
+        </div>
+    </div>
+    <div id="right-contact-header">
+        <div class="contact-header-content">
+            <i class="fab fa-facebook"></i>
+        </div>
+        <div class="contact-header-content">
+            <i class="fab fa-instagram"></i>
+        </div>
+        <div class="contact-header-content">
+            <i class="fab fa-facebook"></i>
+        </div>
+    </div>
+</header>
 <nav>
     <div id="logo">
-        <img src="public/img/Kumbet-logo-orjinal-1024x1024.jpg">
+        <img id="logo-img" src="img/Kumbet-logo-orjinal-1024x1024.jpg">
     </div>
     <div id="nav-buttons">
         <a href="./">Home</a>
@@ -21,6 +49,29 @@
     </div>
 </nav>
 <main>
+    <section>
+        <div id="contact-text">
+            <h1>Contact</h1>
+            <div class="person-container">
+                <h3>Osman</h3>
+                <p>Email: osman.goge@gmail.com</p>
+                <p>Telefoon: 0624890618</p>
+            </div>
+            <div class="person-container">
+                <h3>Osman</h3>
+                <p>Email: osman.goge@gmail.com</p>
+                <p>Telefoon: 0624890618</p>
+            </div>
+            <div class="person-container">
+                <h3>Osman</h3>
+                <p>Email: osman.goge@gmail.com</p>
+                <p>Telefoon: 0624890618</p>
+            </div>
+        </div>
+        <div id="contact-image">
+            <img id="team-img" src="img/het-team.jpeg" alt="Het team" />
+        </div>
+    </section>
 </main>
 </body>
 </html>

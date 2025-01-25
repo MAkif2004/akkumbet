@@ -23,11 +23,50 @@
     justify-content: space-around;
 }
 
+.slider-track {
+    display: flex;
+    justify-content: center;
+
+}
+
 .recent-project-container .project-img {
-    aspect-ratio: 4 / 3;
-    width: 50%;
+    aspect-ratio: 5 / 3;
+    width: 495px;
     height: auto;
     border: 20px solid white;
+}
+
+.hidden {
+    display: none;
+}
+
+.img-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+
+    cursor: pointer;
+}
+
+.left-arrow {
+    left: 40px;
+}
+
+.right-arrow {
+    right: 40px;
 }
 
 .recent-project-container .project-text {

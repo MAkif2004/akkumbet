@@ -5,6 +5,7 @@
 - Logo
 - Footer ontwerp
 - Footer inhoud --
+- maak werkende header social media links --
 
 ### Homepage:
 
@@ -28,3 +29,4 @@
 ### Contact
 
 - Echte namen, emails en telefoonnummers --
+- misschien alleen 1 nummer en e-mail

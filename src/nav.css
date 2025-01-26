@@ -16,6 +16,10 @@ html, body {
     padding: 0;
 }
 
+html {
+    position: relative;
+}
+
 #contact-header {
     width: 100%;
     display: flex;
@@ -39,7 +43,7 @@ nav {
     display: flex;
 
     font-weight: bold;
-    z-index: 1;
+    z-index: 11;
 
 }
 
@@ -83,4 +87,172 @@ img {
 
 #nav-buttons a:hover {
     color: red;
+}
+#dropdownMenu {
+    position: absolute;
+    top: 60px; /* Zorg dat het onder de afbeelding valt */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    min-width: 150px;
+    display: none;
+    flex-direction: column;
+}
+
+#dropdownMenu a {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+#dropdownMenu a:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    nav {
+        height: 70px;
+    }
+
+    #contact-header {
+        position: absolute;
+        bottom: 0;
+        background: #d0d0d0;
+        flex-direction: column;
+    }
+
+    #left-contact-header, #right-contact-header {
+        width: 100%;
+    }
+    #left-contact-header {
+        flex-direction: column;
+    }
+    #right-contact-header {
+        margin: 20px 0;
+    }
+
+    #new-outing-container {
+        width: 100%;
+    }
+
+    .desktop-navbar {
+        display: none;
+    }
+
+    .mobile-navbar {
+        display: flex;
+    }
+
+    #nav-links-mobile {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    #questions-container {
+        margin-top: 50px;
+    }
+}
+
+#hamburger-menu-container {
+    height: 50px;
+    width: 50px;
+
+    position: fixed;
+    right: 15px;
+    top: 15px;
+
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+.hamburger-menu-closing-container {
+
+    justify-content: center !important;
+
+}
+
+.hide {
+    display: none !important;
+}
+
+.hamburger-menu-line {
+    height: 10%;
+    width: 80%;
+
+    background: black;
+}
+
+.hamburger-menu-closing-line {
+
+    height: 10%;
+    width: 80%;
+
+    position: absolute;
+}
+
+.spin-45 {
+    transform: rotate(45deg);
+}
+
+.spin-45-backwards {
+    transform: rotate(-45deg);
+}
+
+.mobile-navbar {
+    display: none;
+}
+#nav-links-mobile {
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    display: none;
+    flex-direction: column;
+    box-shadow: 0px 5px 10px black;
+    z-index: 1;
+    height: 250px
+}
+
+#nav-links-mobile a {
+    text-decoration: none;
+    color: black;
+    background: #eaeaea;
+    padding: 30px;
+    height: 100px;
+    border: 1px solid #bdbdbd;
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+
+@media only screen and (max-width: 768px) {
+    .mobile-navbar {
+        display: flex !important;
+    }
+
+    #nav-links-mobile {
+        display: flex;
+    }
+
+    #nav-buttons, #logo {
+        display: none !important;
+    }
 }

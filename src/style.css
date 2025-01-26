@@ -151,3 +151,45 @@ button.prev {
 button.next {
     right: 10px;
 }
+
+@media only screen and (max-width: 1020px) {
+    #learn-more-container {
+        width: 100%;
+    }
+
+    #introduction-text-container {
+        width: 80%;
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    #learn-more-container {
+        margin-bottom: 200px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+
+    button.prev, button.next {
+        display: none;
+    }
+
+    #bannerSlider #title h1 {
+        font-size: 35px;
+    }
+    #bannerSlider #description h3 {
+        font-size: 24px;
+    }
+
+    #learn-more-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    #learn-more-container a {
+        margin: 30px;
+    }
+}

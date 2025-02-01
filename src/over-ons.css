@@ -184,14 +184,14 @@ html, body {
     height: 85%;
 }
 
-@media only screen and (max-width: 768px) {
-    .value p {
-        width: 353px;
-        font-size: 15px;
+@media only screen and (max-width: 1000px) {
+    #introduction-text-container {
+        width: 100%;
     }
-    #core-values {
-        margin-bottom: 186px;
-        padding: 0;
+    #introduction-text-container h1 {
+        font-size: 17px;
+        padding: 30px;
+        box-shadow: none;
     }
 }
 
@@ -212,6 +212,18 @@ html, body {
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .value p {
+        width: 353px;
+        font-size: 15px;
+    }
+
+    #core-values {
+        margin-bottom: 186px;
+        padding: 0;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     #past-section #past-text img {
         width: 100%;
@@ -221,15 +233,5 @@ html, body {
     }
     h1, #core-values h2 {
         font-size: 28px;
-    }
-}
-@media only screen and (max-width: 1000px) {
-    #introduction-text-container {
-        width: 100%;
-    }
-    #introduction-text-container h1 {
-        font-size: 17px;
-        padding: 30px;
-        box-shadow: none;
     }
 }

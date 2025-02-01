@@ -16,7 +16,7 @@
 
 .recent-project-container {
     max-width: 1000px;
-    width: 70%;
+    width: 1000px;
     padding: 20px;
 
     display: flex;
@@ -74,6 +74,7 @@
     padding: 20px;
     border-radius: 20px;
 }
+
 .recent-project-container h3 {
     font-size: 2em;
     text-align: center;
@@ -81,6 +82,7 @@
     border-radius: 10px;
     padding: 10px;
 }
+
 .recent-project-container p {
     font-size: 1.2em;
     border-radius: 10px;
@@ -104,7 +106,7 @@
 #recentt-projects-container {
     margin-top: 30px;
     padding-top: 20px;
-    width: 70%;
+    width: 1000px;
 
     display: flex;
     flex-direction: column;
@@ -124,8 +126,7 @@
 #recentt-projects-container p {
     margin-top: 10px;
     background: white;
-    max-width: 850px;
-    width: 80%;
+    width: 850px;
     padding: 10px;
 }
 
@@ -135,7 +136,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 11;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,7 +145,8 @@
 
 #fullscreen-image-container {
     aspect-ratio: 5/3;
-    width: 75%;
+    width: clamp(0px, 75%, 90vh * (5 / 3));
+    max-height: 90vh;
     position: relative;
     border: 3px solid black;
     background-size: cover;
@@ -172,4 +174,78 @@
 
 .close-mark {
     font-size: 20px;
+}
+@media only screen and (max-width: 1000px) {
+    #recentt-projects-container {
+        width: 95%;
+    }
+    #recentt-projects-container h2 {
+        font-size: 26px;
+        padding-bottom: 0;
+    }
+    #recentt-projects-container p {
+        width: 93%;
+    }
+    #recent-project-section h1 {
+        font-size: 30px;
+    }
+    .recent-project-container {
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin-top: 50px;
+    }
+    .recent-project-container .project-text h3 {
+        margin: 0;
+    }
+    .recent-project-container .project-text {
+        width: 450px;
+    }
+    .recent-project-container h3, .recent-project-container p {
+        background: none;
+    }
+    .recent-project-container p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 784px) {
+    #fullscreen-image-container {
+        width: min(95vw, 90vh * (5 / 3));
+    }
+    .recent-project-container:last-of-type {
+        margin-bottom: 200px;
+    }
+}
+
+@media only screen and (max-width: 544px) {
+    .recent-project-container .project-img {
+        aspect-ratio: 4/3;
+        width: 80%;
+        border: 10px solid white;
+    }
+    .recent-project-container .project-text {
+        width: 268px;
+    }
+    .arrow {
+        top: 65%;
+    }
+    .left-arrow {
+        left: 35px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .right-arrow {
+        right: 10%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    #image-close-button {
+        top: 9px;
+        right: 9px;
+        width: 30px;
+        height: 30px;
+    }
 }

@@ -1,5 +1,5 @@
 section {
-    width: 70%;
+    width: 1000px;
     margin: auto;
     display: flex;
 }
@@ -42,4 +42,25 @@ h1 {
     width: 515px;
     height: 480px;
     border: 10px solid white;
+}
+
+@media only screen and (max-width: 1060px) {
+    section {
+        width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-bottom: 200px;
+    }
+}
+@media only screen and (max-width: 548px) {
+    section {
+        width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-bottom: 200px;
+    }
+    #contact-image #team-img {
+        width: 350px;
+        height: 281px;
+    }
 }

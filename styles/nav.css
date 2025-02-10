@@ -259,7 +259,15 @@ img {
         display: flex;
     }
 
+    #nav-buttons {
+        display: none;
+    }
+
     #nav-buttons, #logo {
-        display: none !important;
+        justify-content: left;
+    }
+    #logo-img {
+        width: 70px;
+        height: 70px;
     }
 }

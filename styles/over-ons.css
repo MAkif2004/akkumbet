@@ -1,14 +1,40 @@
 html, body {
-    font-family: "Open Sans Condensed", sans-serif;
+    /* Improve readability and rendering */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     background: #eaeaea;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    color: #222;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Normalize text rhythm */
+p {
+    margin: 0 0 1rem;
+    letter-spacing: 0.1px;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 0.75rem;
+    line-height: 1.25;
+    letter-spacing: 0.15px;
+    font-weight: 600;
 }
 
 #contact-header {
     width: 100%;
     display: flex;
     font-family: arial !important;
+}
+
+/* Keep header compact despite global paragraph margins */
+#contact-header p {
+    margin: 0;
+    line-height: 1;
 }
 
 #left-contact-header, #right-contact-header {
@@ -33,25 +59,31 @@ html, body {
 }
 
 #introduction-text-container {
-    width: 1000px;
+    /* Make responsive while keeping a comfortable max width */
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
     border-radius: 5px;
+    padding: 0 16px;
 }
 
 #introduction-section {
     width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 25px;
+    /* Use a comfortable base size for body text */
+    font-size: 18px;
 }
 
 #introduction-section h1 {
-    margin-top: 50px;
-    font-size: 27px;
+    margin-top: 30px;
+    font-size: 30px;
     text-align: center;
     background: white;
-    padding: 30px;
+    padding: 28px;
     border-radius: 10px;
-    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-weight: 600;
 }
 
 #people-section {
@@ -110,6 +142,12 @@ html, body {
     background: rgba(0, 0, 0, 0.4);
     color: white;
     text-align: center;
+    letter-spacing: 0.2px;
+}
+
+.picture h4 {
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 
 #core-values {
@@ -130,8 +168,8 @@ html, body {
 .value h3 {
     font-size: 24px;
     color: #000000;
-    font-weight: normal;
-    border-bottom: 2px solid black;
+    font-weight: 600;
+    border-bottom: 2px solid #222;
     width: 300px;
     margin: 10px auto;
     padding-bottom: 3px;
@@ -139,9 +177,11 @@ html, body {
 
 .value p {
     font-size: 18px;
-    color: #555555;
-    width: 614px;
+    color: #444;
+    /* Make width responsive with a comfortable max */
+    width: min(90%, 680px);
     margin: auto;
+    line-height: 1.7;
 }
 
 .core-value {
@@ -181,13 +221,21 @@ html, body {
 }
 
 #past-section .past-text img {
-    width: 300px;
-    box-shadow: 0 0px 5px 3px #00000052;
-    border: 20px solid white;
+    width: 276px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    border: 10px solid white;
+    border-radius: 22px;
 }
 #past-section .past-text p {
     width: 50%;
     height: 85%;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    padding: 24px;
+    background: white;
+    border-radius: 15px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -195,8 +243,8 @@ html, body {
         width: 100%;
     }
     #introduction-text-container h1 {
-        font-size: 17px;
-        padding: 30px;
+        font-size: 22px;
+        padding: 24px;
         box-shadow: none;
     }
     #past-section .past-text {
@@ -224,8 +272,8 @@ html, body {
 
 @media only screen and (max-width: 768px) {
     .value p {
-        width: 353px;
-        font-size: 15px;
+        width: 90%;
+        font-size: 16px;
     }
 
     #core-values {
@@ -234,12 +282,15 @@ html, body {
     }
 }
 
+/* Fix broken media query and add mobile tweaks */
 @media only screen and (max-width: 500px) {
     #past-section .past-text img {
         width: 90%;
     }
     #past-section .past-text p {
         width: 100%;
+        font-size: 16px;
+        line-height: 1.8;
     }
     h1, #core-values h2 {
         font-size: 28px;

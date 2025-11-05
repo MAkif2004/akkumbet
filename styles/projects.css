@@ -1,135 +1,180 @@
-#recent-project-section {
+/* --- Design refresh: base, containers, cards, typography --- */
+:root {
+    --page-bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --text: #1f2937; /* slate-800 */
+    --muted: #6b7280; /* gray-500 */
+    --border: #e5e7eb; /* gray-200 */
+    --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --radius: 14px;
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    color: var(--text);
+    background: var(--page-bg);
+    line-height: 1.6;
+}
+
+#recent-project-section,
+#recentt-projects-section {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#recent-project-section h1 {
-    margin-top: 70px;
+#recent-project-section h1,
+#recentt-projects-section h2 {
     text-align: center;
-    font-size: 2.5em;
-    border-bottom: 3px solid black;
-    padding-bottom: 20px;
-    width: 70%;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin: 48px 0 8px 0;
 }
 
-.recent-project-container {
-    max-width: 1000px;
-    width: 1000px;
-    padding: 20px;
-
-    display: flex;
-    justify-content: space-around;
+#recent-project-section h1 {
+    font-size: clamp(26px, 3vw, 34px);
+    border: none;
+}
+#recentt-projects-section h2 {
+    font-size: clamp(22px, 2.5vw, 28px);
 }
 
-.slider-track {
-    display: flex;
-    justify-content: center;
-
+/* Responsive container widths */
+.recent-project-container,
+#recentt-projects-container {
+    width: min(1100px, 92vw);
 }
 
-.recent-project-container .project-img {
-    aspect-ratio: 5 / 3;
-    width: 495px;
-    height: auto;
-    border: 20px solid white;
+/* Card style for current project section */
+#recentt-projects-container {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(16px, 3vw, 28px);
+    margin-top: 55px;
+}
+
+/* Current project image wrapper as a clean card visual */
+.project-main-wrapper {
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: none;
+    border: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #fff;
+}
+
+.project-main-wrapper .project-img-main {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #fff;
 }
 
 .hidden {
     display: none !important;
 }
 
+/* Project list: turn each into a clean card with grid layout */
+.recent-project-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(12px, 3vw, 28px);
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(14px, 3vw, 24px);
+    margin: 22px 0;
+}
+
+/* Image container: 4:3, full width, rounded */
 .img-container {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #fff;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.arrow {
+/* Make all slider images (including the top one) fill their 4:3 container and stay fully visible */
+.img-container .project-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #fff;
+    border: 0;
+}
+
+/* Bottom-right image credit badge (shows when current slide has data-credit) */
+.img-container .img-credit {
     position: absolute;
-    top: 50%;
-    width: 42px;
-    height: 42px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-
-    cursor: pointer;
-}
-
-.left-arrow {
-    left: 40px;
-}
-
-.right-arrow {
-    right: 40px;
+    right: 10px;
+    bottom: 10px;
+    padding: 6px 10px;
+    font-size: clamp(10px, 1.6vw, 12px);
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 8px;
+    line-height: 1.3;
+    max-width: 70%;
+    backdrop-filter: saturate(120%) blur(2px);
+    pointer-events: none; /* allow clicks to pass through to image */
+    z-index: 2;
 }
 
 .recent-project-container .project-text {
-    width: 30%;
-    padding: 20px;
-    border-radius: 20px;
+    width: auto;
+    padding: 0;
+    border-radius: 0;
 }
 
+.recentt-projects-container .project-text p {
+    color: #6b7280;
+}
 .recent-project-container h3 {
-    font-size: 2em;
-    text-align: center;
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
+    font-size: clamp(18px, 2.2vw, 24px);
+    background: transparent;
+    padding: 0;
+    margin: 0 0 6px 0;
 }
-
 .recent-project-container p {
-    font-size: 1.2em;
-    border-radius: 10px;
-    text-align: center;
-    background: white;
-    padding: 20px;
+    font-size: clamp(14px, 1.8vw, 16px);
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    color: var(--muted);
 }
 
-#recentt-projects-section {
+/* Arrows: modern subtle floating buttons */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: var(--shadow);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
 }
+.arrow:hover { transform: translateY(-50%) scale(1.05); }
+.left-arrow { left: 10px; }
+.right-arrow { right: 10px; }
 
-#recentt-projects-section h2 {
-    text-align: center;
-    font-size: 2.2em;
-    padding-bottom: 20px;
-}
-
-#recentt-projects-container {
-    margin-top: 30px;
-    padding-top: 20px;
-    width: 1000px;
-
-    display: flex;
-    flex-direction: column;
-}
-
-#recentt-projects-container h3 {
-    background: white;
-    width: 200px;
-
-    font-size: 1.8em;
-
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 0;
-}
-
-#recentt-projects-container p {
-    margin-top: 10px;
-    background: white;
-    width: 850px;
-    padding: 10px;
-}
-
+/* Fullscreen overlay: dim background, rounded media */
 #fullscreen-container {
     width: 100%;
     height: 100vh;
@@ -140,112 +185,73 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.55);
 }
 
 #fullscreen-image-container {
-    aspect-ratio: 5/3;
-    width: clamp(0px, 75%, 90vh * (5 / 3));
-    max-height: 90vh;
+    aspect-ratio: 4 / 3;
+    width: min(92vw, calc(92vh * (4 / 3)));
+    max-height: 92vh;
     position: relative;
-    border: 3px solid black;
-    background-size: cover;
-    pointer-events: none;
+    border: 0;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    background: #000;
 }
 
-.image {
-    cursor: pointer;
+.fullscreen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #000;
 }
 
 #image-close-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-
-    width: 50px;
-    height: 50px;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     border-radius: 50%;
-    background: white;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.close-mark {
-    font-size: 20px;
-}
+/* --- Responsive tweaks --- */
 @media only screen and (max-width: 1000px) {
     #recentt-projects-container {
-        width: 95%;
-    }
-    #recentt-projects-container h2 {
-        font-size: 26px;
-        padding-bottom: 0;
-    }
-    #recentt-projects-container p {
-        width: 93%;
+        width: min(1100px, 94vw);
     }
     #recent-project-section h1 {
-        font-size: 30px;
+        font-size: clamp(24px, 4vw, 30px);
     }
     .recent-project-container {
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        padding: 0;
-        margin-top: 50px;
-    }
-    .recent-project-container .project-text h3 {
-        margin: 0;
-    }
-    .recent-project-container .project-text {
-        width: 450px;
-    }
-    .recent-project-container h3, .recent-project-container p {
-        background: none;
-    }
-    .recent-project-container p {
-        padding: 0;
-        margin: 0;
+        grid-template-columns: 1fr;
     }
 }
 
 @media only screen and (max-width: 784px) {
     #fullscreen-image-container {
-        width: min(95vw, 90vh * (5 / 3));
+        width: min(96vw, calc(92vh * (4 / 3)));
     }
     .recent-project-container:last-of-type {
-        margin-bottom: 200px;
+        margin-bottom: 160px;
     }
 }
 
 @media only screen and (max-width: 544px) {
-    .recent-project-container .project-img {
-        aspect-ratio: 4/3;
-        width: 80%;
-        border: 10px solid white;
-    }
-    .recent-project-container .project-text {
-        width: 268px;
-    }
-    .arrow {
-        top: 65%;
-    }
-    .left-arrow {
-        left: 35px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-    .right-arrow {
-        right: 10%;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    #image-close-button {
-        top: 9px;
-        right: 9px;
-        width: 30px;
-        height: 30px;
-    }
+    .arrow { top: 50%; }
+    .left-arrow { left: 8px; }
+    .right-arrow { right: 8px; }
+    #image-close-button { top: 8px; right: 8px; width: 34px; height: 34px; }
 }

@@ -226,6 +226,12 @@ h1, h2, h3, h4 {
     border: 10px solid white;
     border-radius: 22px;
 }
+#past-section .past-text img:first-of-type {
+    width: 358px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    border: 10px solid white;
+    border-radius: 22px;
+}
 #past-section .past-text p {
     width: 50%;
     height: 85%;

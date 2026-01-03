@@ -28,7 +28,7 @@ body {
 #recentt-projects-section h2 {
     text-align: center;
     font-weight: 700;
-    margin: 48px 0 8px 0;
+    margin: 32px 0 8px 0;
 }
 
 #recent-project-section h1 {
@@ -37,6 +37,7 @@ body {
 }
 #recentt-projects-section h2 {
     font-size: clamp(22px, 2.5vw, 28px);
+    margin: 0 0 22px 0;
 }
 
 /* Responsive container widths */
@@ -93,22 +94,28 @@ body {
 
 /* Image container: 4:3, full width, rounded */
 .img-container {
-    aspect-ratio: 4 / 3;
+    /* keep full width but constrain height so images don't get too tall or too small */
     width: 100%;
     max-width: 100%;
     overflow: hidden;
     border-radius: var(--radius);
     background: #fff;
     position: relative;
+
+    /* Use the container width to derive a sensible max-height that matches the previous 4:3 behavior
+       (previously aspect-ratio: 4/3). This keeps the current visual height as the upper bound while
+       allowing the browser to shrink the container on narrow screens. */
+    max-height: calc(min(1100px, 92vw) * 0.75); /* 3/4 of the container width used elsewhere */
+    min-height: 180px; /* ensure text remains readable and layout doesn't collapse on small screens */
 }
 
-/* Make all slider images (including the top one) fill their 4:3 container and stay fully visible */
+/* Make all slider images (including the top one) fill their container and crop where necessary to
+   avoid black bars above/below. object-fit: cover will maintain aspect ratio but ensure no gaps. */
 .img-container .project-img {
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: contain;
-    background: #fff;
+    object-fit: cover; /* fill container, cropping if needed to avoid letterboxing */
     border: 0;
 }
 
@@ -125,8 +132,18 @@ body {
     line-height: 1.3;
     max-width: 70%;
     backdrop-filter: saturate(120%) blur(2px);
-    pointer-events: none; /* allow clicks to pass through to image */
+    /* allow pointer events so the link inside is clickable */
+    /* pointer-events: none; */
     z-index: 2;
+}
+
+/* Ensure any anchor inside the credit badge looks clickable */
+.img-container .img-credit a {
+    color: inherit;
+    text-decoration: underline;
+}
+.img-container .img-credit a:hover {
+    opacity: 0.9;
 }
 
 .recent-project-container .project-text {
@@ -238,6 +255,12 @@ body {
     .recent-project-container {
         grid-template-columns: 1fr;
     }
+
+    /* On narrower screens allow a slightly smaller minimum height so cards don't become too tall */
+    .img-container {
+        min-height: 160px;
+        max-height: calc(min(1100px, 94vw) * 0.75);
+    }
 }
 
 @media only screen and (max-width: 784px) {
@@ -254,4 +277,10 @@ body {
     .left-arrow { left: 8px; }
     .right-arrow { right: 8px; }
     #image-close-button { top: 8px; right: 8px; width: 34px; height: 34px; }
+
+    /* Mobile: prevent images from becoming too short while keeping cropping behavior */
+    .img-container {
+        min-height: 150px;
+        max-height: calc(94vw * 0.75);
+    }
 }

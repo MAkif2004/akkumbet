@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
     <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/reveal.css"/>
     <link rel="stylesheet" href="styles/nav.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,12 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet">
     <script defer type="module" src="/src/script.js"></script>
+    <script defer type="module" src="/src/RevealScript.js"></script>
     <script defer type="module" src="/src/nav.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Akkumbet</title>
 </head>
 <body>
-<header id="contact-header">
+<header id="contact-header" class="reveal">
     <div id="left-contact-header">
         <div class="contact-header-content">
             <i class="fas fa-phone"></i>
@@ -39,7 +41,7 @@
         </div>
     </div>
 </header>
-<nav>
+<nav class="reveal">
 
     <div id="hamburger-menu-container" class="mobile-navbar">
         <div class="hamburger-menu-line"></div>
@@ -66,7 +68,7 @@
     </div>
 </nav>
 <main>
-    <div id="bannerSlider">
+    <div id="bannerSlider" class="reveal">
         <div class="slider-track">
             <div class="slide active"><img src="img/gebouw1.jpeg"/></div>
 <!--            <div class="slide"><img src="img/gebouw2.jpeg"/></div>-->
@@ -84,7 +86,7 @@
         <button class="next"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <section id="introduction-section">
+    <section id="introduction-section" class="reveal">
         <div id="introduction-text-container">
             <h1>Wie zijn wij?</h1>
             <p>Akkumbet VOF is een vlechtbedrijf gespecialiseerd in ijzervlechtwerk voor de bouw. Wij leveren vakwerk
@@ -98,14 +100,14 @@
                 huis.</p>
         </div>
     </section>
-    <div id="learn-more-container">
+    <div id="learn-more-container" class="reveal">
         <a href="./over-ons.html">Over ons</a>
         <a href="./projecten.html">Projecten</a>
         <a href="./contact.html">Contact</a>
     </div>
 </main>
 <footer>
-    <p>2025 - Alle rechten voorbehouden | Gemaakt door <a href="https://makif.nl">Akif</a> | <a href="./contact.html">Contact</a> | <a href="#top">Terug naar boven</a></p>
+    <p>2026 - Alle rechten voorbehouden | Gemaakt door <a href="https://makif.nl">Akif</a> | <a href="./contact.html">Contact</a> | <a href="#top">Terug naar boven</a></p>
 </footer>
 </body>
 </html>

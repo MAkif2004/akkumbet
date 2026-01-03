@@ -52,6 +52,12 @@ function ensureCreditElement(imgContainer) {
     if (!imgContainer.querySelector('.img-credit')) {
         const credit = document.createElement('div');
         credit.className = 'img-credit hidden';
+        // create an anchor element that will be populated later
+        const a = document.createElement('a');
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+        a.textContent = '';
+        credit.appendChild(a);
         imgContainer.appendChild(credit);
     }
 }
@@ -60,17 +66,29 @@ function ensureCreditElement(imgContainer) {
 function updateCreditForContainer(imgContainer) {
     const creditEl = imgContainer.querySelector('.img-credit');
     if (!creditEl) return;
+    const anchor = creditEl.querySelector('a');
     const imgs = imgContainer.querySelectorAll('.project-img');
     let current = null;
     for (let i = 0; i < imgs.length; i++) {
         if (!imgs[i].classList.contains('hidden')) { current = imgs[i]; break; }
     }
     const creditText = current && current.dataset && current.dataset.credit ? current.dataset.credit : '';
+
     if (creditText) {
-        creditEl.textContent = creditText;
+        // Remove a leading "bron:" (case-insensitive) and surrounding whitespace for display
+        const display = creditText.replace(/^\s*bron:\s*/i, '').trim();
+        // Determine href: if the display already starts with http(s), use it; otherwise prepend https://
+        let href = display;
+        if (!/^https?:\/\//i.test(href)) {
+            href = 'https://' + href;
+        }
+        // Set anchor attributes safely
+        anchor.textContent = display;
+        anchor.href = href;
         creditEl.classList.remove('hidden');
     } else {
-        creditEl.textContent = '';
+        anchor.textContent = '';
+        anchor.removeAttribute('href');
         creditEl.classList.add('hidden');
     }
 }

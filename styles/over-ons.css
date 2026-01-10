@@ -1,6 +1,10 @@
+/* Normalize box sizing */
+* { box-sizing: border-box; }
+
+/* Improve readability and rendering */
 html, body {
-    /* Improve readability and rendering */
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    /* Use a consistent stack to reduce rendering differences across hosts */
+    font-family: "Open Sans Condensed", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     background: #eaeaea;
     margin: 0;
     padding: 0;
@@ -28,13 +32,15 @@ h1, h2, h3, h4 {
 #contact-header {
     width: 100%;
     display: flex;
-    font-family: arial !important;
+    font-family: arial, sans-serif !important;
+    align-items: center; /* vertically center contents */
+    padding: 8px 0;      /* add top/bottom breathing room */
 }
 
-/* Keep header compact despite global paragraph margins */
+/* Restore spacing inside the header */
 #contact-header p {
-    margin: 0;
-    line-height: 1;
+    margin: 6px 0;       /* give some vertical margin */
+    line-height: 1.25;   /* make lines comfortable */
 }
 
 #left-contact-header, #right-contact-header {

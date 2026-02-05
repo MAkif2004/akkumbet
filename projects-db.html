@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects from DB</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
+    h1 { margin-bottom: 1rem; }
+    .error { color: #b00020; margin: 1rem 0; }
+    .list { display: grid; gap: 1rem; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; }
+    .title { font-weight: 600; margin: 0 0 .5rem; }
+    .meta { color: #555; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <h1>Projects</h1>
+  <div id="status" class="meta">Loading…</div>
+  <div id="error" class="error" hidden></div>
+  <div id="projects" class="list"></div>
+
+  <script>
+    const API_URL = 'http://localhost:3000/projects';
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+    const listEl = document.getElementById('projects');
+
+    async function loadProjects() {
+      try {
+        const res = await fetch(API_URL, { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) throw new Error('Request failed: ' + res.status);
+        const data = await res.json();
+        statusEl.textContent = `Loaded ${Array.isArray(data) ? data.length : 0} projects`;
+        render(data);
+      } catch (e) {
+        statusEl.textContent = '';
+        errorEl.hidden = false;
+        errorEl.textContent = 'Failed to load projects: ' + e.message;
+      }
+    }
+
+    function render(items) {
+      listEl.innerHTML = '';
+      (items || []).forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = p.title || '(Untitled)';
+
+        const desc = document.createElement('div');
+        desc.textContent = p.description || '';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const created = p.created_at ? new Date(p.created_at) : null;
+        meta.textContent = `ID: ${p.id} • Created: ${created ? created.toLocaleString() : 'n/a'}`;
+
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(meta);
+        listEl.appendChild(card);
+      });
+    }
+
+    loadProjects();
+  </script>
+</body>
+</html>

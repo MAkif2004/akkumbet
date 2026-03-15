@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
 }
+#right-contact-header {
+    align-items: center;
+}
 
 .contact-header-content {
     display: flex;
@@ -14,6 +17,74 @@ html, body {
     background: #eaeaea;
     margin: 0;
     padding: 0;
+}
+
+.login-icon, .logout-icon {
+    cursor: pointer;
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.logout-icon {
+    color: #19b500;
+}
+
+.user-menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.logout-icon {
+    cursor: pointer;
+    color: #19b500;
+}
+
+#dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    min-width: 150px;
+    display: none;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#dropdown-menu.show {
+    display: flex;
+}
+
+#dropdown-menu a,
+#dropdown-menu button {
+    padding: 12px 16px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+}
+
+#dropdown-menu a:hover,
+#dropdown-menu button:hover {
+    background-color: #f0f0f0;
+}
+
+#dropdown-menu button {
+    padding: 12px 16px;
 }
 
 html {

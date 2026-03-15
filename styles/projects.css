@@ -24,6 +24,10 @@ body {
     align-items: center;
 }
 
+#recentt-projects-section {
+    position: relative;
+}
+
 #recent-project-section h1,
 #recentt-projects-section h2 {
     text-align: center;
@@ -77,6 +81,35 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+.add-project-button {
+    position: absolute;
+    right: 70px;
+    top: 70px;
+    background: white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+    width: 65px;
+    height: 65px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-project-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.line {
+    position: absolute;
+    width: 5px;
+    height: 30px;
+    background: #4e4e4e;
+}
+.line1 {
+    transform: rotate(90deg);
 }
 
 /* Project list: turn each into a clean card with grid layout */
@@ -151,9 +184,13 @@ body {
     padding: 0;
     border-radius: 0;
 }
+recent-project-container .project-test p {
+    white-space: pre-wrap;
+}
 
 .recentt-projects-container .project-text p {
     color: #6b7280;
+    white-space: pre-wrap;
 }
 .recent-project-container h3 {
     font-size: clamp(18px, 2.2vw, 24px);

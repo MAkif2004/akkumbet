@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="stylesheet" href="styles/nav.css"/>
+    <link rel="stylesheet" href="styles/login.css"/>
+    <script type="module" src="database/admin.js"></script>
+    <title>Login</title>
+</head>
+<body>
+
+    <script type="module">
+        import { db } from './database/connection.js'
+        db.auth.onAuthStateChange((event, session) => {
+            console.log(event);
+            console.log(session);
+            if (event === 'SIGNED_IN') {
+                window.location.href = '/'
+            }
+        })
+    </script>
+    <div id="top" aria-hidden="true"></div>
+    <header id="contact-header">
+        <div id="left-contact-header">
+            <div class="contact-header-content">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+31624890618"><p>06 24890618</p></a>
+            </div>
+            <div class="contact-header-content">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:osman.goge@gmail.com"><p>osman.goge@gmail.com</p></a>
+            </div>
+        </div>
+        <div id="right-contact-header">
+            <script type="module">
+            import { initUserMenu } from './src/user-menu.js';
+            initUserMenu();
+            </script>
+        </div>
+    </header>
+    <nav>
+        <div id="hamburger-menu-container" class="mobile-navbar">
+            <div class="hamburger-menu-line"></div>
+            <div class="hamburger-menu-line"></div>
+            <div class="hamburger-menu-line"></div>
+        </div>
+
+        <div id="nav-links-mobile" class="hide">
+            <a class="nav-link" href="/index.html">Home</a>
+            <a class="nav-link" href="/over-ons.html">Over ons</a>
+            <a class="nav-link" href="/projecten.html">Projecten</a>
+            <a class="nav-link" href="/contact.html">Contact</a>
+        </div>
+
+        <div id="logo">
+            <a href="./"><img id="logo-img" src="img/logo-white.svg" alt="Akkumbet Logo"></a>
+        </div>
+        <div id="nav-buttons">
+            <a href="./">Home</a>
+            <a href="./over-ons.html">Over ons</a>
+            <a href="./projecten">Projecten</a>
+            <a href="./contact">Contact</a>
+        </div>
+    </nav>
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-fields-container">
+                <h2>Login</h2>
+
+                <form id="login-form" aria-label="Login form" novalidate>
+                    <input id="email" name="email" type="email" placeholder="email" required />
+                    <input id="password" name="password" type="password" placeholder="wachtwoord" required />
+                    <button type="submit">Inloggen</button>
+                    <p id="auth-status" role="status" aria-live="polite"></p>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import { db } from './database/connection.js';
+
+        const form = document.getElementById('login-form');
+        const statusEl = document.getElementById('auth-status');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                statusEl.textContent = 'Logging in...';
+
+                const formData = new FormData(form);
+                const email = (formData.get('email') || '').toString().trim();
+                const password = (formData.get('password') || '').toString();
+
+                if (!email || !password) {
+                    statusEl.textContent = 'Please provide email and password.';
+                    return;
+                }
+
+                try {
+                    const { data, error } = await db.auth.signInWithPassword({
+                        email,
+                        password,
+                    });
+
+                    if (error) {
+                        statusEl.textContent = error.message || 'Login failed';
+                        return;
+                    }
+
+                    statusEl.textContent = 'Logged in — redirecting...';
+                } catch (err) {
+                    statusEl.textContent = err?.message || 'Unexpected error';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

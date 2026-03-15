@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="stylesheet" href="styles/nav.css"/>
+    <link rel="stylesheet" href="styles/manage-projects.css"/>
+    <script defer type="module" src="/src/manage-projects.js"></script>
+    <script defer type="module" src="/src/nav.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Beheer Projecten</title>
+</head>
+<body>
+<script type="module">
+    window.isLoggedIn = false;
+    import { db } from './database/connection.js';
+    db.auth.onAuthStateChange((event, session) => {
+        console.log(event, session);
+        window.isLoggedIn = (event !== 'SIGNED_OUT');
+        window.dispatchEvent(new CustomEvent('auth-changed', { detail: { event, session } }));
+        if (event === 'SIGNED_OUT') {
+            window.location.href = '/login.html';
+        }
+    });
+</script>
+<div id="top" aria-hidden="true"></div>
+<header id="contact-header">
+    <div id="left-contact-header">
+        <div class="contact-header-content">
+            <i class="fas fa-phone"></i>
+            <a href="tel:+31624890618"><p>06 24890618</p></a>
+        </div>
+        <div class="contact-header-content">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:osman.goge@gmail.com"><p>osman.goge@gmail.com</p></a>
+        </div>
+    </div>
+    <div id="right-contact-header">
+        <script type="module">
+            import { initUserMenu } from '/src/user-menu.js';
+            initUserMenu();
+        </script>
+    </div>
+</header>
+<nav>
+    <div id="hamburger-menu-container" class="mobile-navbar">
+        <div class="hamburger-menu-line"></div>
+        <div class="hamburger-menu-line"></div>
+        <div class="hamburger-menu-line"></div>
+    </div>
+
+    <div id="nav-links-mobile" class="hide">
+        <a class="nav-link" href="/index.html">Home</a>
+        <a class="nav-link" href="/over-ons.html">Over ons</a>
+        <a class="nav-link" href="/projecten.html">Projecten</a>
+        <a class="nav-link" href="/contact.html">Contact</a>
+    </div>
+
+    <div id="logo">
+        <a href="./"><img id="logo-img" src="img/logo-white.svg" alt="Akkumbet Logo"></a>
+    </div>
+    <div id="nav-buttons">
+        <a href="./">Home</a>
+        <a href="./over-ons.html">Over ons</a>
+        <a href="./projecten">Projecten</a>
+        <a href="./contact">Contact</a>
+    </div>
+</nav>
+
+<main class="manage-container">
+    <section class="manage-section">
+        <h1>Beheer Projecten</h1>
+
+        <button id="add-project-btn" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nieuw Project
+        </button>
+
+        <div id="projects-list" class="projects-list">
+            <p>Projecten laden...</p>
+        </div>
+    </section>
+</main>
+
+<!-- Add/Edit Project Modal -->
+<div id="project-modal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title">Nieuw Project</h2>
+            <button class="close-btn" id="close-modal">&times;</button>
+        </div>
+        <form id="project-form">
+            <div class="form-group">
+                <label for="project-title">Titel:</label>
+                <input type="text" id="project-title" name="title" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="project-description">Beschrijving:</label>
+                <textarea id="project-description" name="description" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="project-images">Afbeeldingen:</label>
+                <input type="file" id="project-images" name="images" multiple accept="image/*"/>
+                <div id="current-images" class="current-images"></div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+                <button type="button" class="btn btn-secondary" id="cancel-btn">Annuleren</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>2026 - Alle rechten voorbehouden | Gemaakt door <a href="https://makif.nl">Akif</a> | <a href="./contact.html">Contact</a>
+        | <a href="#top">Terug naar boven</a></p>
+</footer>
+</body>
+</html>

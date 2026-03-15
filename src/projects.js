@@ -1,6 +1,4 @@
-onload();
-
-function onload() {
+export function onload() {
     const rightArrow = document.getElementsByClassName('right-arrow');
     const leftArrow = document.getElementsByClassName('left-arrow');
     const imgContainers = document.getElementsByClassName('img-container');

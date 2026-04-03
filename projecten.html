@@ -19,8 +19,7 @@
 window.isLoggedIn = false;
 import { db } from './database/connection.js';
     db.auth.onAuthStateChange((event, session) => {
-    console.log(event, session);
-    window.isLoggedIn = (event !== 'SIGNED_OUT');
+    window.isLoggedIn = (session !== null);
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { event, session } }));
 });
 </script>
@@ -92,14 +91,11 @@ import { db } from './database/connection.js';
         document.getElementById(("recentt-projects-section")).innerHTML = "<p>Er zijn momenteel geen projecten beschikbaar.</p>";
     } else {
         let imagesHtml = '';
+        const description = projects[0].description?.replace(/\n/g, '<br>') ?? ''
         for (let i = 0; i < projects[0].project_image.length; i++) {
             imagesHtml += `<img class="project-img image${i > 0 ? " hidden" : ""}" src="${projects[0].project_image[i].image_url}" alt="${projects[0].title} - foto ${i + 1}"/>`;
         }
         document.getElementById("recentt-projects-section").innerHTML = `
-            <div class="add-project-button">
-                <div class="line line1"></div>
-                <div class="line line2"></div>
-            </div>
             <div id="recentt-projects-container">
         <h2>Huidig project</h2>
         <div class="img-container">
@@ -109,7 +105,7 @@ import { db } from './database/connection.js';
         </div>
         <div class="project-text">
             <h3>${projects[0].title}</h3>
-            <p>${projects[0].description}
+            <p>${description}
             </p>
         </div>
     </div>

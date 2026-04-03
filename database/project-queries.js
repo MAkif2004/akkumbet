@@ -1,4 +1,5 @@
 import { db } from './connection.js'
+import { showToast, showError } from '../src/ui-notifications.js'
 
 
 // ─── Create ─────────────────────────────────────────────────────────────────
@@ -15,7 +16,7 @@ async function addProject() {
         .select()
         .single()
 
-    if (error) return alert('Fout bij aanmaken project: ' + error.message)
+    if (error) return showError(error, 'Fout bij aanmaken project.');
 
     // 2. Afbeeldingen uploaden naar Storage bucket "project-images"
     const imageInserts = []
@@ -29,7 +30,7 @@ async function addProject() {
             .upload(path, file)
 
         if (uploadError) {
-            alert('Fout bij uploaden foto: ' + uploadError.message)
+            showError(uploadError, 'Fout bij uploaden foto.');
             continue
         }
 
@@ -50,10 +51,10 @@ async function addProject() {
             .from('project_image')
             .insert(imageInserts)
 
-        if (imgError) return alert('Fout bij opslaan afbeeldingen: ' + imgError.message)
+        if (imgError) return showError(imgError, 'Fout bij opslaan afbeeldingen.');
     }
 
-    alert('Project toegevoegd!')
+    showToast('Project toegevoegd!', 'success')
     loadProjects()
 }
 
@@ -73,9 +74,9 @@ export async function loadProjects() {
           position
         )
       `)
-        .order('created_at', { ascending: false })
+        .order('project_order', { ascending: true })
 
-    if (error) return alert('Fout: ' + error.message)
+    if (error) return showError(error, 'Fout bij laden projecten.');
 
     return projects;
 }
@@ -101,14 +102,17 @@ async function deleteProject(id) {
         await db.storage.from('project-images').remove(paths)
     }
 
-    // 3. Project verwijderen — project_image rijen gaan automatisch mee via CASCADE
+    // 3. Project verwijderen project_image rijen gaan automatisch mee via CASCADE
     const { error } = await db
         .from('project')
         .delete()
         .eq('id', id)
 
-    if (error) alert('Fout bij verwijderen: ' + error.message)
-    else loadProjects()
+    if (error) showError(error, 'Fout bij verwijderen project.');
+    else {
+        showToast('Project verwijderd!', 'success')
+        loadProjects()
+    }
 }
 window.addProject = addProject
 window.loadProjects = loadProjects

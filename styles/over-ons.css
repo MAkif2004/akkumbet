@@ -6,7 +6,6 @@ html, body {
     background: #eaeaea;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
     color: #222;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -25,37 +24,6 @@ h1, h2, h3, h4 {
     line-height: 1.25;
     letter-spacing: 0.15px;
     font-weight: 600;
-}
-
-#contact-header {
-    width: 100%;
-    display: flex;
-    font-family: arial, sans-serif !important;
-    align-items: center; /* vertically center contents */
-    padding: 8px 0;      /* add top/bottom breathing room */
-}
-
-/* Restore spacing inside the header */
-#contact-header p {
-    margin: 6px 0;       /* give some vertical margin */
-    line-height: 1.25;   /* make lines comfortable */
-}
-
-#left-contact-header, #right-contact-header {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-}
-
-.contact-header-content {
-    display: flex;
-    margin: 0 10px;
-}
-
-.fas {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 10px;
 }
 
 #introduction-section p:first-of-type {

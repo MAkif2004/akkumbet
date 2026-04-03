@@ -16,6 +16,14 @@
     <title>Akkumbet</title>
 </head>
 <body>
+<script type="module">
+    window.isLoggedIn = false;
+    import { db } from './database/connection.js';
+    db.auth.onAuthStateChange((event, session) => {
+        window.isLoggedIn = (session !== null);
+        window.dispatchEvent(new CustomEvent('auth-changed', { detail: { event, session } }));
+    });
+</script>
 <header id="contact-header">
     <div id="left-contact-header">
         <div class="contact-header-content">
@@ -28,7 +36,10 @@
         </div>
     </div>
     <div id="right-contact-header">
-
+        <script type="module">
+            import { initUserMenu } from '/src/user-menu.js';
+            initUserMenu();
+        </script>
     </div>
 </header>
 <nav>

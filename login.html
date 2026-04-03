@@ -18,7 +18,7 @@
         db.auth.onAuthStateChange((event, session) => {
             console.log(event);
             console.log(session);
-            if (event === 'SIGNED_IN') {
+            if (session !== null) {
                 window.location.href = '/'
             }
         })
@@ -37,8 +37,8 @@
         </div>
         <div id="right-contact-header">
             <script type="module">
-            import { initUserMenu } from './src/user-menu.js';
-            initUserMenu();
+                import { initUserMenu } from '/src/user-menu.js';
+                initUserMenu();
             </script>
         </div>
     </header>
@@ -84,6 +84,7 @@
 
     <script type="module">
         import { db } from './database/connection.js';
+        import { showToast, showError } from './src/ui-notifications.js';
 
         const form = document.getElementById('login-form');
         const statusEl = document.getElementById('auth-status');
@@ -92,14 +93,15 @@
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                statusEl.textContent = 'Logging in...';
+                statusEl.textContent = 'Bezig met inloggen...';
 
                 const formData = new FormData(form);
                 const email = (formData.get('email') || '').toString().trim();
                 const password = (formData.get('password') || '').toString();
 
                 if (!email || !password) {
-                    statusEl.textContent = 'Please provide email and password.';
+                    statusEl.textContent = 'Vul e-mail en wachtwoord in.';
+                    showToast('Vul e-mail en wachtwoord in.', 'warning');
                     return;
                 }
 
@@ -110,13 +112,18 @@
                     });
 
                     if (error) {
-                        statusEl.textContent = error.message || 'Login failed';
+                        // Friendly user message + developer-facing log via showError
+                        statusEl.textContent = 'Inloggen mislukt.';
+                        showError(error, 'Fout bij inloggen.');
                         return;
                     }
 
-                    statusEl.textContent = 'Logged in — redirecting...';
+                    statusEl.textContent = 'Ingelogd. doorsturen...';
+                    showToast('Ingelogd, even geduld...', 'success');
+                    // The global auth state handler will redirect the user when a session exists
                 } catch (err) {
-                    statusEl.textContent = err?.message || 'Unexpected error';
+                    statusEl.textContent = 'Onverwachte fout bij inloggen.';
+                    showError(err, 'Onverwachte fout bij inloggen.');
                 }
             });
         }

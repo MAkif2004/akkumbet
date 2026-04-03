@@ -1,4 +1,5 @@
 import { db } from '../database/connection.js';
+import { showToast, showError } from './ui-notifications.js';
 
 let currentEditingProjectId = null;
 let currentEditingImages = [];
@@ -28,7 +29,7 @@ async function loadAndDisplayProjects() {
             .order('project_order', { ascending: true })
             .order('created_at', { ascending: false });
 
-        if (error) throw error;
+        if (error) { showError(error, 'Fout bij laden projecten.'); return; }
 
         if (!projects || projects.length === 0) {
             projectsList.innerHTML = `
@@ -96,7 +97,8 @@ async function loadAndDisplayProjects() {
         });
     } catch (error) {
         console.error('Error loading projects:', error);
-        projectsList.innerHTML = `<p style="color: red;">Error loading projects: ${error.message}</p>`;
+        projectsList.innerHTML = `<p style="color: red;">Fout bij laden projecten. Probeer het later opnieuw.</p>`;
+        showError(error, 'Fout bij laden projecten.');
     }
 }
 
@@ -111,7 +113,7 @@ function setupDragAndDrop() {
             e.dataTransfer.effectAllowed = 'move';
         });
 
-        card.addEventListener('dragend', (e) => {
+        card.addEventListener('dragend', () => {
             card.classList.remove('dragging');
             cards.forEach(c => c.classList.remove('drag-over'));
             draggedElement = null;
@@ -126,7 +128,7 @@ function setupDragAndDrop() {
             }
         });
 
-        card.addEventListener('dragleave', (e) => {
+        card.addEventListener('dragleave', () => {
             card.classList.remove('drag-over');
         });
 
@@ -177,7 +179,7 @@ async function updateProjectOrder() {
         }
     } catch (error) {
         console.error('Error updating project order:', error);
-        alert('Error updating project order: ' + error.message);
+        showError(error, 'Fout bij bijwerken volgorde projecten.');
     }
 }
 
@@ -220,7 +222,7 @@ function displayCurrentImages() {
 
     container.innerHTML = currentEditingImages
         .sort((a, b) => (a.position || 0) - (b.position || 0))
-        .map((img, index) => `
+        .map((img) => `
             <div class="current-image" data-image-id="${img.id}">
                 <img src="${img.image_url}" alt="Project image"/>
                 <button type="button" class="remove-image" data-image-id="${img.id}">×</button>
@@ -270,13 +272,13 @@ async function deleteProject(projectId) {
             .from('project')
             .delete()
             .eq('id', projectId);
-        if (error) throw error;
+        if (error) { showError(error, 'Fout bij verwijderen project.'); return; }
 
-        alert('Project verwijderd!');
+        showToast('Project verwijderd!', 'success');
         loadAndDisplayProjects();
     } catch (error) {
         console.error('Error deleting project:', error);
-        alert('Error deleting project: ' + error.message);
+        showError(error, 'Fout bij verwijderen project.');
     }
 }
 
@@ -289,7 +291,7 @@ async function saveProject(e) {
     const newImages = document.getElementById('project-images').files;
 
     if (!title) {
-        alert('Titel is verplicht');
+        showToast('Titel is verplicht', 'warning');
         return;
     }
 
@@ -314,7 +316,6 @@ async function saveProject(e) {
                 .select()
                 .single();
 
-            if (error) throw error;
             projectId = project.id;
         } else {
             // Update existing project
@@ -389,12 +390,12 @@ async function saveProject(e) {
             }
         }
 
-        alert(currentEditingProjectId ? 'Project bijgewerkt!' : 'Project aangemaakt!');
+        showToast(currentEditingProjectId ? 'Project bijgewerkt!' : 'Project aangemaakt!', 'success');
         closeModal();
         loadAndDisplayProjects();
     } catch (error) {
         console.error('Error saving project:', error);
-        alert('Error saving project: ' + error.message);
+        showError(error, 'Fout bij opslaan project.');
     }
 }
 
@@ -422,3 +423,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

@@ -16,10 +16,18 @@
     window.isLoggedIn = false;
     import { db } from './database/connection.js';
     db.auth.onAuthStateChange((event, session) => {
-        console.log(event, session);
-        window.isLoggedIn = (event !== 'SIGNED_OUT');
+        window.isLoggedIn = (session !== null);
         window.dispatchEvent(new CustomEvent('auth-changed', { detail: { event, session } }));
-        if (event === 'SIGNED_OUT') {
+    });
+</script>
+<script type="module">
+    window.isLoggedIn = false;
+    import { db } from './database/connection.js';
+    db.auth.onAuthStateChange((event, session) => {
+        console.log(event, session);
+        window.isLoggedIn = (session !== null);
+        window.dispatchEvent(new CustomEvent('auth-changed', { detail: { event, session } }));
+        if (session === null) {
             window.location.href = '/login.html';
         }
     });

@@ -83,60 +83,66 @@ import { db } from './database/connection.js';
     <h1 class="reveal">Andere projecten</h1>
 </section>
 <script type="module">
-    import {loadProjects} from '/database/project-queries.js';
-    import {onload} from '/src/projects.js';
+    import { loadProjects } from '/database/project-queries.js';
+    import { onload } from '/src/projects.js';
 
-    const projects = await loadProjects();
-    if (!projects || projects.length < 1) {
-        document.getElementById(("recentt-projects-section")).innerHTML = "<p>Er zijn momenteel geen projecten beschikbaar.</p>";
-    } else {
-        let imagesHtml = '';
-        const description = projects[0].description?.replace(/\n/g, '<br>') ?? ''
-        for (let i = 0; i < projects[0].project_image.length; i++) {
-            imagesHtml += `<img class="project-img image${i > 0 ? " hidden" : ""}" src="${projects[0].project_image[i].image_url}" alt="${projects[0].title} - foto ${i + 1}"/>`;
-        }
-        document.getElementById("recentt-projects-section").innerHTML = `
-            <div id="recentt-projects-container">
-        <h2>Huidig project</h2>
-        <div class="img-container">
+    (async () => {
+        const projects = await loadProjects();
+
+        if (!projects || projects.length < 1) {
+            document.getElementById('recentt-projects-section').innerHTML =
+                '<p>Er zijn momenteel geen projecten beschikbaar.</p>';
+        } else {
+            let imagesHtml = '';
+            const description = projects[0].description?.replace(/\n/g, '<br>') ?? '';
+            for (let i = 0; i < projects[0].project_image.length; i++) {
+                imagesHtml += `<img class="project-img image${i > 0 ? ' hidden' : ''}" src="${projects[0].project_image[i].image_url}" alt="${projects[0].title} - foto ${i + 1}"/>`;
+            }
+            document.getElementById('recentt-projects-section').innerHTML = `
+        <div id="recentt-projects-container">
+          <h2>Huidig project</h2>
+          <div class="img-container">
             ${imagesHtml}
             <div class="arrow left-arrow"><i class="fas fa-chevron-left"></i></div>
             <div class="arrow right-arrow"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="project-text">
+          </div>
+          <div class="project-text">
             <h3>${projects[0].title}</h3>
-            <p>${description}
-            </p>
+            <p>${description}</p>
+          </div>
         </div>
-    </div>
-        `;
-    }
-    if (projects.length < 2) {
-        document.getElementById("recent-project-section").innerHTML += "<p>Er zijn momenteel geen andere projecten beschikbaar.</p>";
-    } else {
-        for (let i = 1; i < projects.length; i++) {
-            let imagesHtml = '';
-            const description = projects[i].description?.replace(/\n/g, '<br>') ?? ''
-            for (let j = 0; j < projects[i].project_image.length; j++) {
-                imagesHtml += `<img class="project-img image${j > 0 ? ' hidden' : ''}" src="${projects[i].project_image[j].image_url}" alt="${projects[i].title} - foto ${j + 1}"/>`;
-            }
-
-            document.getElementById("recent-project-section").innerHTML +=
-                `<div class="recent-project-container reveal">
-        <div class="img-container">
-                    ${imagesHtml}
-            <div class="arrow left-arrow"><i class="fas fa-chevron-left"></i></div>
-            <div class="arrow right-arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
-        <div class="project-text">
-            <h3>${projects[i].title}</h3>
-            <p>${description}
-            </p>
-        </div>
-    </div>`;
+      `;
         }
-    }
-    onload();
+
+        if (!projects || projects.length < 2) {
+            document.getElementById('recent-project-section').innerHTML +=
+                '<p>Er zijn momenteel geen andere projecten beschikbaar.</p>';
+        } else {
+            for (let i = 1; i < projects.length; i++) {
+                let imagesHtml = '';
+                const description = projects[i].description?.replace(/\n/g, '<br>') ?? '';
+                for (let j = 0; j < projects[i].project_image.length; j++) {
+                    imagesHtml += `<img class="project-img image${j > 0 ? ' hidden' : ''}" src="${projects[i].project_image[j].image_url}" alt="${projects[i].title} - foto ${j + 1}"/>`;
+                }
+
+                document.getElementById('recent-project-section').innerHTML += `
+          <div class="recent-project-container reveal">
+            <div class="img-container">
+              ${imagesHtml}
+              <div class="arrow left-arrow"><i class="fas fa-chevron-left"></i></div>
+              <div class="arrow right-arrow"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="project-text">
+              <h3>${projects[i].title}</h3>
+              <p>${description}</p>
+            </div>
+          </div>
+        `;
+            }
+        }
+
+        onload();
+    })();
 </script>
 <footer>
     <p>2026 - Alle rechten voorbehouden | Gemaakt door <a href="https://makif.nl">Akif</a> | <a href="./contact.html">Contact</a>

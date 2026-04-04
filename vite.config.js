@@ -10,6 +10,8 @@ export default defineConfig({
                 contact: resolve(__dirname, 'contact.html'),
                 overons: resolve(__dirname, 'over-ons.html'),
                 projecten: resolve(__dirname, 'projecten.html'),
+                manageprojects: resolve(__dirname, 'manage-projects.html'),
+                login: resolve(__dirname, 'login.html'),
             }
         }
     }
